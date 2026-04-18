@@ -19,6 +19,12 @@ import (
 // BindKey indicates a default bind key.
 const BindKey = "_gin-gonic/gin/bindkey"
 
+// localhostIP indicates the default localhost IP address.
+const localhostIP = "127.0.0.1"
+
+// localhostIPv6 indicates the default localhost IPv6 address.
+const localhostIPv6 = "::1"
+
 // Bind is a helper function for given interface object and returns a Gin middleware.
 func Bind(val any) HandlerFunc {
 	value := reflect.ValueOf(val)
@@ -156,7 +162,7 @@ func resolveAddress(addr []string) string {
 
 // https://stackoverflow.com/questions/53069040/checking-a-string-contains-only-ascii-characters
 func isASCII(s string) bool {
-	for i := 0; i < len(s); i++ {
+	for i := range len(s) {
 		if s[i] > unicode.MaxASCII {
 			return false
 		}
